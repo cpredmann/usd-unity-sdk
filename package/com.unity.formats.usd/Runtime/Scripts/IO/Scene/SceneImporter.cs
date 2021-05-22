@@ -1039,9 +1039,6 @@ namespace Unity.Formats.USD
                                     pxr.SdfPath meshPath = skinningQuery.GetPrim().GetPath();
                                     var goMesh = primMap[meshPath];
 
-                                    // In terms of performance, this is almost free.
-                                    SkinnedMeshRenderer smr = goMesh.GetComponent<SkinnedMeshRenderer>();
-                                    smr.sharedMesh.ClearBlendShapes();
 
                                     if (importOptions.importSkinWeights && skinningQuery.HasJointInfluences())
                                     {
@@ -1059,6 +1056,9 @@ namespace Unity.Formats.USD
                                                 importOptions);
                                             Profiler.EndSample();
 
+                                            // In terms of performance, this is almost free.
+                                            SkinnedMeshRenderer smr = goMesh.GetComponent<SkinnedMeshRenderer>();
+                                            smr.sharedMesh.ClearBlendShapes();
                                             // TODO: Check if this is correct or should be something specific (not always the first child).
                                             smr.rootBone = primMap[skelPath].transform.GetChild(0);
                                         }

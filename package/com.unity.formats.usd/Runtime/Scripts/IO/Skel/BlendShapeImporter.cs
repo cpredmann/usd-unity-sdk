@@ -53,6 +53,7 @@ namespace Unity.Formats.USD
             VtTokenArray blendShapeOrder = new VtTokenArray();
             skinningQuery.GetBlendShapeOrder(blendShapeOrder);
 
+            Profiler.BeginSample("Add Blend Shape Offsets");
             for (int i = 0; i < blendShapeQuery.GetNumBlendShapes(); ++i)
             {
                 var blendShapeName = blendShapeOrder[i].ToString();
@@ -99,6 +100,7 @@ namespace Unity.Formats.USD
                     }
                 }
             }
+            Profiler.EndSample();
         }
 
         public static void BuildBlendShapeWeights(
